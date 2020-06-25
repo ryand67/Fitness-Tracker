@@ -13,19 +13,12 @@ app.use(express.json());
 
 app.use(express.static('public'))
 
-const db = require('./models/index');
+require('./controller/api-routes')(app);
+require('./controller/html-routes')(app);
 
-mongoose.connect(process.env.MONOGODB_URI || 'mongodb://localhost/workoutdb', {useNewUrlParser: true})
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/workout'
 
-app.get('/', (req, res) => {
-    
-})
-
-app.get('/exercise', (req, res) => {
-    res.sendFile(__dirname + '/public/exercise.html', (err) => {
-        if(err) throw err;
-    })
-})
+mongoose.connect(MONGODB_URI);
 
 app.listen(PORT, (err) => {
     if(err) throw err;
