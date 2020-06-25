@@ -16,9 +16,9 @@ app.use(express.static('public'))
 require('./controller/api-routes')(app);
 require('./controller/html-routes')(app);
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/workout'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://ryand67:password1@ds047335.mlab.com:47335/heroku_k3q60g9f'
 
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useMongoClient: true});
 
 app.listen(PORT, (err) => {
     if(err) throw err;
